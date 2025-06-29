@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./CanvasForm.css"; // Assuming you have some styles for the form
+import "./CanvasForm.css"; 
 
 const CanvasForm = ({ canvasSize, setCanvasSize, onAdd }) => {
   const [element, setElement] = useState({
@@ -17,7 +17,7 @@ const CanvasForm = ({ canvasSize, setCanvasSize, onAdd }) => {
   });
 
   const handleInitCanvas = async () => {
-    await axios.post("http://localhost:3000/init", {
+    await axios.post("https://canvas-builder-agxg.onrender.com/init", {
       width: canvasSize.width,
       height: canvasSize.height,
     });

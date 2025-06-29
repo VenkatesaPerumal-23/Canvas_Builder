@@ -14,7 +14,7 @@ function App() {
 const handleAddElement = async (element) => {
     setElements((prev) => [...prev, element]);
 
-    const base = "http://localhost:3000";
+    const base = "https://canvas-builder-agxg.onrender.com";
 
     if (element.type === "rectangle" || element.type === "circle") {
       await axios.post(`${base}/add/shape`, element);
@@ -40,7 +40,7 @@ const handleAddElement = async (element) => {
     const formData = new FormData();
     formData.append("canvas", blob, "canvas.png");
 
-    const response = await axios.post("http://localhost:3000/export-pdf", formData, {
+    const response = await axios.post("https://canvas-builder-agxg.onrender.com/export-pdf", formData, {
       responseType: "blob",
     });
 
