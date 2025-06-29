@@ -5,5 +5,9 @@
     "express": "^5.1.0",
     "multer": "^2.0.1",
     "pdfkit": "^0.17.1"
+    
+  },
+  "scripts": {
+    "install": "npm rebuild canvas --build-from-source"
   }
 }
