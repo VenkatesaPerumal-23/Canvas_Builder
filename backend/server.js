@@ -10,7 +10,6 @@ const app = express();
 const PORT = 3000;
 
 let canvas, ctx;
-let elements = [];
 
 app.use(cors());
 app.use(express.json());
@@ -24,8 +23,7 @@ app.post("/init", (req, res) => {
   canvas = createCanvas(parseInt(width), parseInt(height));
   ctx = canvas.getContext("2d");
   ctx.fillStyle = "#fff";
-  ctx.fillRect(0, 0, width, height);
-  elements = [];
+  ctx.fillRect(0, 0, parseInt(width), parseInt(height));
   res.json({ message: "Canvas initialized." });
 });
 
@@ -34,16 +32,14 @@ app.post("/add/shape", (req, res) => {
   ctx.fillStyle = color || "#000";
 
   if (type === "rectangle") {
-    ctx.fillRect(x, y, width, height);
+    ctx.fillRect(parseInt(x), parseInt(y), parseInt(width), parseInt(height));
   } else if (type === "circle") {
     ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.arc(parseInt(x), parseInt(y), parseInt(radius), 0, 2 * Math.PI);
     ctx.fill();
   } else {
     return res.status(400).json({ error: "Invalid shape type." });
   }
-
-  elements.push({ type, x, y, width, height, radius, color });
   res.json({ message: `${type} added.` });
 });
 
@@ -51,9 +47,7 @@ app.post("/add/text", (req, res) => {
   const { text, x, y, fontSize, color } = req.body;
   ctx.fillStyle = color || "#000";
   ctx.font = `${fontSize || 20}px Arial`;
-  ctx.fillText(text, x, y);
-
-  elements.push({ type: "text", text, x, y, fontSize, color });
+  ctx.fillText(text, parseInt(x), parseInt(y));
   res.json({ message: "Text added." });
 });
 
